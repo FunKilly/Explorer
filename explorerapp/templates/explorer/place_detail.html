@@ -1,0 +1,36 @@
+{% extends "explorer/base.html" %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+
+  {{ place.name }}
+{% endblock %}
+
+{% block content %}
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/place_detail.css' %}">
+      <div class="container">
+        <div class="col-md-6">
+
+            <div class="row">
+                <h2>{{ place.name }}</h2>
+                  <h4><a href="{{ place.category.get_absolute_url }}">{{ place.category }}</a></h4>
+            <div id="description" >
+                  {{ place.description|linebreaks }}
+            </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+          <img id="placeimg" class = "img-thumbnail" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+        </div>
+
+
+
+      </div>
+
+  </div>
+
+{% endblock %}

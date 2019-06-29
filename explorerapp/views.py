@@ -1,17 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
-#from .models import
-#from .forms import
-
-
 from django.shortcuts import render
 
-# Create your views here.
+from .models import City, Category, Place
+
 
 def index(request):
-    #strona glowna
-    return render(request, 'explorerapp/index.html')
+    # Strona glowna.
+    places = Place.objects.all()[:10]
+    context = {'places': places}
+    return render(request, 'explorer/index.html', context)
+
+
+def place_detail(request, id, slug):
+    place = get_object_or_404(Place, id=id, slug=slug)
+    context = {'place': place}
+    return render(request, 'explorer/place_detail.html', context)
+
+def places_list_by_category(request):
+    category = Category.objects.all()
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+    context = {'category': category}
+    return render(request, 'explorer/category.html', context)

@@ -1,0 +1,26 @@
+{% extends "explorer/base.html"%}
+
+{% block header %}
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+  <div  class="maintop">
+    <h1 class="maintop">Witaj Podróżniku</h1>
+    <h2 class="maintop">Zaplanuj Podróż</h2>
+  </div>
+
+
+{% endblock header %}
+
+
+{% block content %}
+    <div id="main" class="place-list">
+    {% for place in places %}
+      <div class="place">
+        <a href="{{ place.get_absolute_url }}">
+          <img  src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+        </a>
+      </div>
+    {% endfor %}
+    </div>
+
+{% endblock content %}
