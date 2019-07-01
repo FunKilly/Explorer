@@ -9,28 +9,62 @@
 
 {% block content %}
   {% load static %}
+  {% load mathfilters %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/place_detail.css' %}">
-      <div class="container">
-        <div class="col-md-6">
+        <div class="container">
+          <div class="row" >
+            <div class="col-md-4">
 
-            <div class="row">
-                <h2>{{ place.name }}</h2>
-                  <h4><a href="{{ place.category.get_absolute_url }}">{{ place.category }}</a></h4>
-            <div id="description" >
-                  {{ place.description|linebreaks }}
+                <div >
+                    <h2 style="text-shadow: 2px 2px black;">{{ place.name }}</h2>
+                      <h4><a href="{{ place.category.get_absolute_url }}">{{ place.category }}</a></h4>
+                <div id="description" class="description">
+                      {{ place.description|linebreaks }}
+                </div>
+
+
+                </div>
             </div>
 
+            <div class="col-md-5">
+              <img id="placeimg" class = "img-thumbnail" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
             </div>
+            <div class="col-md-3" id="information-table" >
+                <h4 class="place-name">{{ place.name }}</h4>
+                <table style="background-color:white;">
+                    <tr >
+                        <th>Adres:</th>
+                        <td>{{place.address.city }} {{ place.address.street }}, {{place.address.location_number }}</td>
+
+                    </tr>
+                    <tr>
+                        <th>Cena:</th>
+                        <td>{{ place.cost }} PLN</td>
+                    </tr>
+                    <tr>
+                        <th>Typ atrakcji: </th>
+                        <td>{{ place.category }}</td>
+                    </tr>
+                    <tr>
+                        <th>Data powstania: </th>
+                        <td>{{ place.creation_date}} rok</td>
+                    </tr>
+                    <tr>
+                        <th>Ocena Użytkowników:</th>
+                        <td>{{ place.sum_of_rating|div:place.num_of_ratings |floatformat }} ({{place.num_of_ratings }} ocen)</td>
+                    </tr>
+                </table>
+                <p><h3>Oceń To Miejsce</h3></p>
+                <form action='.' method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Prześlij Ocenę" style="color:black"></input>
+                </form>
+            </div>
+          </div>
+
         </div>
 
-        <div class="col-md-6">
-          <img id="placeimg" class = "img-thumbnail" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-        </div>
-
-
-
-      </div>
-
-  </div>
 
 {% endblock %}

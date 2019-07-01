@@ -1,6 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from django.urls import reverse
+from django.core.validators import MaxValueValidator
 
 
 class City(models.Model):
@@ -40,6 +41,9 @@ class Place(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    creation_date = models.DecimalField(max_digits=4, decimal_places=0, )
+    sum_of_rating = models.DecimalField(max_digits=9, decimal_places=2, default=5)
+    num_of_ratings = models.IntegerField(default=1)
 
     class Meta:
         ordering = ('name',)
@@ -51,3 +55,11 @@ class Place(models.Model):
         return reverse('explorer:place_detail', args=[self.id, self.slug])
 
 
+class Comment(models.Model):
+    place = Place.ForeignKey(Place, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)

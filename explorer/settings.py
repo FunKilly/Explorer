@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #third party apps
     'bootstrap3',
     'taggit',
+    'mathfilters',
     #my apps
     'explorerapp',
     'users',

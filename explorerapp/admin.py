@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import City, Category, Place, Address
 
-
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ['name','slug']
@@ -27,3 +26,4 @@ class PlaceAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
     list_display = ['street', 'city', 'location_number']
     search_fields = ['city']
+
