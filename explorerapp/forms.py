@@ -1,5 +1,5 @@
 from django import forms
-
+from .models import Comment
 
 class RatingForm(forms.Form):
     OPTIONS = [
@@ -10,3 +10,9 @@ class RatingForm(forms.Form):
         (5, 'Świetne!')
     ]
     Rating = forms.ChoiceField(widget=forms.RadioSelect, choices=OPTIONS)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')

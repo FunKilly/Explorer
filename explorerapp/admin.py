@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import City, Category, Place, Address
+from .models import City, Category, Place, Address, Comment
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
@@ -27,3 +27,8 @@ class AddressAdmin(admin.ModelAdmin):
     list_display = ['street', 'city', 'location_number']
     search_fields = ['city']
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'place', 'created', 'active']
+    list_filter = ('active', 'created', 'updated')
+    search_fields = ('name', 'email', 'body')

@@ -56,10 +56,16 @@ class Place(models.Model):
 
 
 class Comment(models.Model):
-    place = Place.ForeignKey(Place, on_delete=models.CASCADE, related_name='comments')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(selfs):
+        return f'Comment by {self.name} on {self.post}'
