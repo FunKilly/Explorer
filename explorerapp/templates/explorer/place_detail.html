@@ -1,6 +1,6 @@
 {% extends "explorer/base.html" %}
 
-{% load bootstrap3 %}
+
 
 {% block title %}
 
@@ -10,6 +10,7 @@
 {% block content %}
   {% load static %}
   {% load mathfilters %}
+  {% load bootstrap3 %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/place_detail.css' %}">
         <div class="container">
@@ -28,7 +29,7 @@
             </div>
 
             <div class="col-md-5">
-              <img id="placeimg" class = "img-thumbnail" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+              <img id="placeimg" style="" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
             </div>
             <div class="col-md-3" id="information-table" >
                 <h4 class="place-name">{{ place.name }}</h4>
@@ -55,15 +56,24 @@
                         <td>{{ place.sum_of_rating|div:place.num_of_ratings |floatformat }} ({{ place.num_of_ratings }} ocen)</td>
                     </tr>
                 </table>
-                <p><h3>Oceń To Miejsce</h3></p>
-                <form  method="post">
+                <h3 class="rating_form">Oceń To Miejsce</h3>
+                <form  method="post" class="rating_form" >
                     {% csrf_token %}
-                    {{ rating_form }}
-                    <input name="rating" type="submit" value="Prześlij Ocenę" style="color:black"></input>
+                    {% for hidden_field in rating_form.hidden_fields %}
+                        {{ hidden_field.errors }}
+                        {{ hidden_field }}
+                    {% endfor %}
+                    {% for field in rating_form.visible_fields %}
+                          {{ field.errors }}
+                          {{ field }}
+                          {{ field.help_text }}
+                    {% endfor %}
+                    <input class="rating_btn"  name="rating" type="submit" value="Prześlij Ocenę" ></input>
                 </form>
 
             </div>
           </div>
+            <hr class="hline" >
           <div class="row">
               <div class="col-md-6">
                   {% with comments.count as total_comments %}
@@ -73,8 +83,10 @@
                   {% endwith %}
                   {% for comment in comments %}
                     <div class="comment">
+                        <hr class="hline">
                         <p class="info">
                             Comment {{ forloop.counter }} by {{ comment.name }}
+                            </br>
                             {{ comment.created }}
                         </p>
                     {{ comment.body|linebreaks }}
@@ -82,11 +94,17 @@
                   {% empty %}
                     <p>There are no comments yet.</p>
                   {% endfor %}
+                  <hr class="hline">
                   <form  method="post" style="color:black">
                     {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <input name="comment" type="submit" value="Prześlij Komentarz" style="color:black"></input>
-                </form></div>
+                    <div class="comment_form">
+                      <div class="comment_field">Twoja Nazwa </div>  {{ comment_form.name }}
+                      <div class="comment_field">E-mail </div>{{ comment_form.email }}
+                      <div class="comment_field">Treść </div>{{ comment_form.body }}
+                    </div>
+                    <input class="comment_btn" name="comment" type="submit" value="Prześlij Komentarz" ></input>
+                </form>
+              </div>
           </div>
         </div>
 

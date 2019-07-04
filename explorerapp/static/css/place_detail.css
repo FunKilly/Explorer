@@ -3,6 +3,8 @@
     width: 400px;
     margin-left: 50px;
     margin-top: 40px;
+    box-shadow: 6px 6px 5px 0px rgba(0,0,0,0.75);
+    border-radius:4px;
 }
 
 body {
@@ -60,4 +62,49 @@ td{
 }
 th,td{
     border: 1px solid black;
+}
+
+h3.rating_form{
+    margin-top:60px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:25px;
+    text-shadow: 1px 1px black;
+    color:white;
+}
+
+form.rating_form{
+    padding-top:10px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:15px;
+    text-shadow: 1px 1px black;
+    color:white;
+}
+.rating_btn{
+    font-weight:bold;
+    color:black;
+    font-size:13px;
+}
+
+.hline {
+    height:0.1em;
+    width:100%;
+    color: rgb(160,160,255);
+}
+
+.comment_form {
+    padding-top:5px;
+}
+
+.comment_field{
+    padding-top:10px;
+    border-radius:4px;
+    font-size:17px;
+    font-family:Verdana, Geneva, sans-serif;
+    text-shadow: 1px 1px black;
+    color:white;
+}
+.comment_btn{
+    font-weight: bold;
+    margin-top:10px;
+
 }

@@ -44,6 +44,7 @@ class Place(models.Model):
     creation_date = models.DecimalField(max_digits=4, decimal_places=0, )
     sum_of_rating = models.DecimalField(max_digits=9, decimal_places=2, default=5)
     num_of_ratings = models.IntegerField(default=1)
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('name',)
