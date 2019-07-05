@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.core.validators import MaxValueValidator
 
 
+
+
 class City(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, unique=True)
@@ -26,10 +28,12 @@ class Category(models.Model):
 class Address(models.Model):
     street = models.CharField(max_length=60)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    location_number = models.CharField(max_length=10)
+    location_number = models.CharField(max_length=10, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True)
     length = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
-
+    def __str__(self):
+        address = (self.street, self.location_number, self.city.name)
+        return ' '.join(address)
 
 class Place(models.Model):
     name = models.CharField(max_length=60)

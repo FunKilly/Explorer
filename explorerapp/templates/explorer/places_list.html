@@ -1,0 +1,29 @@
+{% extends "explorer/base.html" %}
+
+
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+  {% load static %}
+  {% load bootstrap3 %}
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/places_list.css' %}">
+  <div class="gallery">
+  {% for place in places %}
+      <div class="place">
+        <a class="title" href="{{ place.get_absolute_url }}"> {{ place.name }} </a>
+        <a  href="{{ place.get_absolute_url }}">  <img class="image" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"> </a>
+        <div class="desc" >{{ place.description | truncatechars:300 }} <a href="{{place.get_absolute_url}}">(czytaj dalej)</a> </div>
+
+      </div>
+  {% endfor %}
+  </div>
+  <div class="pagination">
+    {% include "explorer/pagination.html" with page=places %}
+  </div>
+
+
+{% endblock %}

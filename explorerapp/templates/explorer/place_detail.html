@@ -20,6 +20,7 @@
                 <div >
                     <h2 style="text-shadow: 2px 2px black;">{{ place.name }}</h2>
                       <h4><a href="{{ place.category.get_absolute_url }}">{{ place.category }}</a></h4>
+                      <p class="tags">Tags: {{ place.tags.all|join:", " }}</p>
                 <div id="description" class="description">
                       {{ place.description|linebreaks }}
                 </div>

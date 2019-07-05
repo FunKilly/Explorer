@@ -25,7 +25,7 @@
 		  <a class="navbar-brand" href="{% url 'explorer:index' %}">Strona Główna</a>
 	    </div>
 		
-		<div id="navbarclass="navbar-collapse collapse">
+		<div id="navbarclass=" class="navbar-collapse collapse">
 		  <ul class="nav navbar-nav">
 
 
@@ -33,9 +33,11 @@
 				{% if user.is_authenticated %}
 				<li><a>Hello, {{ user.username }}.</a></li>
 				<li><a href="{% url 'users:logout' %}">Wyloguj się</a></li>
+				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
 				{% else %}
 				<li><a href="{% url 'users:register' %}">Zarejestruj się</a></li>
 				<li><a href="{% url 'users:login' %}">Zaloguj się</a></li>
+				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
 				{% endif %}
 			</ul>
 		  </ul>

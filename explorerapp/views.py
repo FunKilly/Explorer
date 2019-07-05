@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import City, Category, Place, Comment
 from .forms import RatingForm, CommentForm
@@ -88,11 +89,27 @@ class PlaceView(View):
                 ctxt['comment_form'] = comment_form
         return render(request, self.template_name, self.get_context_data(**ctxt))
 
-def places_list_by_category(request):
+
+def places_list_by_category(request,category_slug):
     category = Category.objects.all()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
     context = {'category': category}
-    return render(request, 'explorer/category.html', context)
+    return render(request, 'explorer/category_list.html', context)
+
+
+def places_list(request):
+    object_list = Place.objects.all()
+    paginator = Paginator(object_list, 5)
+    page = request.GET.get('page')
+    try:
+        places = paginator.page(page)
+    except PageNotAnInteger:
+        places = paginator.page(1)
+    except EmptyPage:
+        places = paginator.plage(paginator.num_pages)
+
+    context = {'places': places,'page':page}
+    return render(request, 'explorer/places_list.html', context)
 
 
