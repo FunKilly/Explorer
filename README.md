@@ -1,2 +1,5 @@
-# This is explorer web app
-* I'm currently writing it - 4.07.2019
+#Explorer
+ Application supporting active holidays by visiting individual places.
+* Built With
+ Python
+ Django
