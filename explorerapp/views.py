@@ -4,11 +4,12 @@ from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import City, Category, Place, Comment
 from .forms import RatingForm, CommentForm
+from .filters import PlaceFilter
 
 def index(request):
     # Strona glowna.
@@ -16,22 +17,6 @@ def index(request):
     context = {'places': places}
     return render(request, 'explorer/index.html', context)
 
-
-'''def place_detail(request, id, slug):
-    place = get_object_or_404(Place, id=id, slug=slug)
-    if request.method == 'POST' and form.is_valid():
-        form = RatingForm(request.POST)
-        if form.is_valid():
-            place.sum_of_rating += int(form.cleaned_data['Rating'])
-            place.num_of_ratings += 1
-            place.save()
-            return redirect('explorer:place_detail', id=id, slug=slug)
-    if request.method == 'POST':
-    else:
-        form = RatingForm
-
-    context = {'place': place,'form':form}
-    return render(request, 'explorer/place_detail.html', context)'''
 
 class PlaceView(View):
     template_name = 'explorer/place_detail.html'
@@ -98,18 +83,34 @@ def places_list_by_category(request,category_slug):
     return render(request, 'explorer/category_list.html', context)
 
 
+
+class PlacesList(ListView):
+    model = Place
+    template_name = 'explorer/places_list.html'
+    context_object_name = 'places'
+    paginate_by = 3
+    queryset = Place.objects.all()
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = PlaceFilter(self.request.GET,  queryset=self.get_queryset())
+
+        return context
+
+
 def places_list(request):
-    object_list = Place.objects.all()
-    paginator = Paginator(object_list, 5)
-    page = request.GET.get('page')
+    page_list = Place.objects.all()
+    place_filter = PlaceFilter(request.GET, queryset=page_list)
+    place_list = place_filter.qs
+
+    paginator = Paginator(place_list, 4)
+    page = request.GET.get('page', 1)
     try:
         places = paginator.page(page)
     except PageNotAnInteger:
         places = paginator.page(1)
     except EmptyPage:
-        places = paginator.plage(paginator.num_pages)
-
-    context = {'places': places,'page':page}
+        places = paginator.page(paginator.num_pages )
+    context = {'paginator':paginator, 'filter':place_filter, 'places':places}
     return render(request, 'explorer/places_list.html', context)
-
-

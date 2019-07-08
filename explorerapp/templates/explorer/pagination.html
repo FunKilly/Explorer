@@ -1,46 +1,23 @@
-<div class="pagination">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pagination.css' %}">
-    <span class="step-links">
-        {% if page.has_previous %}
-            <a href="?page={{ page.previous_page_number }}">Poprzednia</a>
-        {% endif %}
-        <span class="current">
-            Strona {{ page.number }} z {{ page.paginator.num_pages }}.
-        </span>
-            {% if page.has_next %}
-                <a href="?page={{ page.next_page_number }}">Następna</a>
-            {% endif %}
-    </span>
+{% if places.has_other_pages %}
+        <ul class="pagination">
+    {% if places.has_previous %}
+      <li><a href="?page={{ places.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+     <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+    {% for i in places.paginator.page_range %}
+      {% if places.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)
+     </span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if places.has_next %}
+      <li><a href="?page={{ places.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
 
-
-  <div class="pagination__wrapper">
-      <ul class="pagination_1">
-
-        <li><button class="prev" title="previous page">&#10094;</button></li>
-
-
-                {% if page.has_previous %}
-                  <li><button action="?page={{ page.previous_page_number }}" ><a href="?page={{ page.previous_page_number}}">{{ page.previous_page_number}}</a></button></li>
-
-                {% endif %}
-
-
-        <li>
-          <button class="active" >{{ page.number }}</button>
-        </li>
-
-           {% if page.has_next %}
-             <li><button href="?page={{ page.next_page_number}}">{{ page.next_page_number}}</button></li>
-           {% endif %}
-
-
-
-
-        <li><button class="next" title="next page">&#10095;</button></li>
-          <li>
-          <button >{{ page.paginator.num_pages }}</button>
-          </li>
-      </ul>
-</div>
-</div>
+{%  endif %}

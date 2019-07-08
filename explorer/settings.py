@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'taggit',
     'mathfilters',
+    'django_filters',
     #my apps
     'explorerapp',
     'users',

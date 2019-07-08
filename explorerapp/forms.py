@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from .models import Comment
+from .models import Comment, Place, Address
 
 class RatingForm(forms.Form):
     OPTIONS = [
@@ -20,3 +20,5 @@ class CommentForm(forms.ModelForm):
         labels = {
             'name': _('Twój nick'),
             'body': _('Treść')}
+
+
