@@ -31,6 +31,7 @@ class Address(models.Model):
     location_number = models.CharField(max_length=10, blank=True)
     latitude = models.DecimalField(max_digits=10, decimal_places=8, null=True, blank=True)
     length = models.DecimalField(max_digits=11, decimal_places=8, null=True, blank=True)
+
     def __str__(self):
         address = (self.street, self.location_number, self.city.name)
         return ' '.join(address)

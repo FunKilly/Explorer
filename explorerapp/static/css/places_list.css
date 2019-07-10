@@ -64,4 +64,16 @@ a:hover{
     text-align:justify;
 }
 
+.filter {
 
+    margin:50px;
+    border-collapse: separate;
+    border-spacing: 15px 50px;
+}
+.col-md-4{
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+}
+.name {
+    font-weight:bold;
+}

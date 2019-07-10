@@ -31,11 +31,20 @@
             </div>
 
         </div>
+
         <div class="col-md-4">
-            <form method="GET">
-                {{ filter.form }}
+
+            <form class="filter" method="GET">
+                <div class="name">Nazwa</div> {{ filter.form.name }}
+                <div class="name">Miasto</div> {{ filter.form.address__city }}
+                <div class="name">Koszt mniejszy niż</div> {{ filter.form.cost__lt }}
+                <div class="name">Koszt większy niż</div> {{ filter.form.cost__gt }}
+                <div class="name">Kategoria</div> {{ filter.form.category}}
+                <br/><br/>
                 <button  type="submit" class="btn btn-primary" >Filtruj</button>
             </form>
+
+
         </div>
     </div>
   </div>
