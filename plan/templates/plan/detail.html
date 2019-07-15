@@ -1,0 +1,54 @@
+{% extends "explorer/base.html" %}
+{% load static %}
+
+{% block title %}
+    Twój Plan
+{% endblock %}
+
+{% block content %}
+  <h1>Twój plan</h1>
+  <table class="plan">
+      <thead>
+        <tr>
+            <th>Zdjęcie</th>
+            <th>Miejsce</th>
+            <th>Termin</th>
+            <th>Usuń</th>
+            <th>Cena</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in plan %}
+            {% with place=item.place %}
+              <tr>
+                  <td>
+                      <a href="{{ place.get_absolute_url }}">
+                          <img style="height:200px;width:200px;" src="{% if place.image %}{{ place.image.url }}
+                           {% else %}{% static "img/no_image.png" %}{% endif %}">
+                      </a>
+                  </td>
+                  <td>
+                      {{ place.name }}
+                  </td>
+                  <td>
+                      {{ item.start_date}} - {{ item.end_date }}
+                  </td>
+                  <td>
+                      <a href="{% url 'plan:plan_remove' place.id %}">Remove</a>
+                  </td>
+                  <td class="num">{{ item.cost }}$</td>
+              </tr>
+            {% endwith %}
+          {% endfor %}
+        <tr class="total">
+            <td>Całkowity koszt</td>
+            <td colspan="4"></td>
+            <td class="num">{{ plan.get_total_price }}</td>
+        </tr>
+      </tbody>
+  </table>
+  <p class="text-right">
+      <a href="{% url 'explorer:places_list' %}" class="button">Kontynuuj planowanie</a>
+      <a href="#" class="button">Sprawdź</a>
+  </p>
+{% endblock %}

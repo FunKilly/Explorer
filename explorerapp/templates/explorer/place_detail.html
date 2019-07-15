@@ -57,6 +57,13 @@
                         <td>{{ place.sum_of_rating|div:place.num_of_ratings |floatformat }} ({{ place.num_of_ratings }} ocen)</td>
                     </tr>
                 </table>
+                {{ plan_form.media }}
+                <form action="{% url 'plan:plan_add' place.id %}" method="post">
+                    {{ plan_form.start_date }}
+                    {{ plan_form.end_date }}
+                    {% csrf_token %}
+                    <input type="submit" value="Dodaj miejsce">
+                </form>
                 <h3 class="rating_form">Oceń To Miejsce</h3>
                 <form  method="post" class="rating_form" >
                     {% csrf_token %}

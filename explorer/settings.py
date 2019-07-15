@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     #third party apps
     'bootstrap3',
     'taggit',
-    'mathfilters',
     'django_filters',
+    'mathfilters',
+    'bootstrap_datepicker_plus',
     #my apps
     'explorerapp',
     'users',
@@ -138,3 +139,7 @@ LOGIN_URL = '/users/login/'
 BOOTSTRAP3 = {
 'include_jquery': True,
 }
+
+#Session
+
+PLAN_SESSION_ID = 'plan'

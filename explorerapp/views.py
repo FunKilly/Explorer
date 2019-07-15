@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import View, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from plan.forms import PlanAddPlaceForm
 
 from .models import City, Category, Place, Comment
 from .forms import RatingForm, CommentForm
@@ -39,6 +40,8 @@ class PlaceView(View):
             kwargs['rating_form'] = RatingForm()
         if 'comment_form' not in kwargs:
             kwargs['comment_form'] = CommentForm()
+        if 'plan_form' not in kwargs:
+            kwargs['plan_form'] = PlanAddPlaceForm()
         return kwargs
 
     def get(self, request, *args, **kwargs):
@@ -114,3 +117,5 @@ def places_list(request):
         places = paginator.page(paginator.num_pages )
     context = {'paginator':paginator, 'filter':place_filter, 'places':places}
     return render(request, 'explorer/places_list.html', context)
+
+
