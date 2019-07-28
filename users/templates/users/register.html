@@ -1,4 +1,4 @@
-{% extends "explorerapp/base.html" %}
+{% extends "explorer/base.html" %}
 {% load bootstrap3 %}
 
 {% block header %}
@@ -15,7 +15,7 @@
 	{% buttons %}
 	<button name="submit" class="btn btn-primary">Zarejestruj się</button>
 	{% endbuttons %}
-	<input type="hidden" name="next" value="{% url 'explorerapp:index' %}" />
+	<input type="hidden" name="next" value="{% url 'explorer:index' %}" />
 
   </form>
 {% endblock content %}

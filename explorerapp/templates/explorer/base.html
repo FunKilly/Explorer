@@ -16,47 +16,67 @@
 <body >
     <nav class="navbar navbar-default navbar-static-top">
 	  <div class="container">
-	  
+
 	    <div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed"
+		  <button type="button" class="navbar-toggle collapse"
 		    data-toogle="collapse" data-target="#navbar"
 			aria-expanded="false" aria-controls="navbar">
 	      </button>
 		  <a class="navbar-brand" href="{% url 'explorer:index' %}">Strona Główna</a>
-	    </div>
-		
-		<div id="navbarclass=" class="navbar-collapse collapse">
+
+
+
 		  <ul class="nav navbar-nav">
-
-
 			<ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
-				<li><a>Hello, {{ user.username }}.</a></li>
+                <p class="navbar-text navbar-left">Witaj <a href="#" class="navbar-link">, {{ user.username }}.</a></p>
 				<li><a href="{% url 'users:logout' %}">Wyloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
+                <li><a href="{% url 'plan:plan_detail' %}">Plan</a></li>
 				{% else %}
 				<li><a href="{% url 'users:register' %}">Zarejestruj się</a></li>
 				<li><a href="{% url 'users:login' %}">Zaloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
 				{% endif %}
+                <p class="navbar-text navbar-right">
+                    {% with total_items=plan|length %}
+                      {% if plan|length > 0 %}
+                        Twój Plan:
+                        <a href="{% url 'plan:plan_detail' %}">
+                            {{ total_items }} Pozycje
+                            {{ plan.get_total_price }}PLN
+                        </a>
+                      {% else %}
+                        Twój plan jest pusty
+                      {% endif %}
+                    {% endwith %} </p>
+                <li>
+                </li>
 			</ul>
 		  </ul>
-		
-		
+          <div class="form-inline my-2 my-lg-0">
+
+
+          </div>
+
+
         </div><!--/.nav-collapse -->
+
 	  </div>
 	</nav>
+
+
 	
 	<div class="container">
 	  <div class="page-header">
 	    {% block header %}{% endblock header %}
       </div>
+    <div id="subheader">
+
+    </div>
 	  <div>
 	    {% block content %}{% endblock content %}
       </div>
-	  <footer>
-		  <div style="float:right">Oskar Kowalczyk</div>
-	  </footer>
 
 	</div> <!-- /container -->
 

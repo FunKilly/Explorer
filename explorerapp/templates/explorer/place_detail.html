@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/place_detail.css' %}">
         <div class="container">
           <div class="row" >
-            <div class="col-md-4">
-
+            <div class="col-md-9" style="">
+                <img id="placeimg" style="float:right; margin:25px" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
                 <div >
                     <h2 style="text-shadow: 2px 2px black;">{{ place.name }}</h2>
                       <h4><a href="{{ place.category.get_absolute_url }}">{{ place.category }}</a></h4>
@@ -27,10 +27,8 @@
 
 
                 </div>
-            </div>
 
-            <div class="col-md-5">
-              <img id="placeimg" style="" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+
             </div>
             <div class="col-md-3" id="information-table" >
                 <h4 class="place-name">{{ place.name }}</h4>
@@ -57,33 +55,23 @@
                         <td>{{ place.sum_of_rating|div:place.num_of_ratings |floatformat }} ({{ place.num_of_ratings }} ocen)</td>
                     </tr>
                 </table>
+                <br>
                 {{ plan_form.media }}
-                <form action="{% url 'plan:plan_add' place.id %}" method="post">
-                    {{ plan_form.start_date }}
-                    {{ plan_form.end_date }}
+                <form action="{% url 'plan:plan_add' place.id %}"  method="post" class="plan_form" >
                     {% csrf_token %}
-                    <input type="submit" value="Dodaj miejsce">
+                    {{ plan_form.start_date.errors }}
+                    <p style="float:left">{{ plan_form.end_date.errors }}</p>
+                    <p>{{ plan_form.start_date }}</p>
+                    <p>{{ plan_form.end_date }}</p>
+                    <input class="btn btn-primary btn-lg btn-block"  name="plan" type="submit" value="Dodaj miejsce" style="float:right" ></input>
                 </form>
-                <h3 class="rating_form">Oceń To Miejsce</h3>
-                <form  method="post" class="rating_form" >
-                    {% csrf_token %}
-                    {% for hidden_field in rating_form.hidden_fields %}
-                        {{ hidden_field.errors }}
-                        {{ hidden_field }}
-                    {% endfor %}
-                    {% for field in rating_form.visible_fields %}
-                          {{ field.errors }}
-                          {{ field }}
-                          {{ field.help_text }}
-                    {% endfor %}
-                    <input class="rating_btn"  name="rating" type="submit" value="Prześlij Ocenę" ></input>
-                </form>
-
             </div>
           </div>
-            <hr class="hline" >
-          <div class="row">
-              <div class="col-md-6">
+
+          <div class="row" >
+
+              <div class="col-md-9" style="padding-top:60px;">
+              <hr class="hline" >
                   {% with comments.count as total_comments %}
                     <h2>
                         {{ total_comments }} comment{{ total_comments|pluralize }}
@@ -100,7 +88,7 @@
                     {{ comment.body|linebreaks }}
                     </div>
                   {% empty %}
-                    <p>There are no comments yet.</p>
+                    <p>Nie ma komentarzy</p>
                   {% endfor %}
                   <hr class="hline">
                   <form  method="post" style="color:black">
@@ -113,8 +101,33 @@
                     <input class="comment_btn" name="comment" type="submit" value="Prześlij Komentarz" ></input>
                 </form>
               </div>
+              <div class="col-md-3" >
+                <div>
+                  <h3 class="rating_form" style="text-align: center" >Oceń To Miejsce</h3>
+                    <form  method="post" class="rating_form" >
+                        {% csrf_token %}
+                        {% for hidden_field in rating_form.hidden_fields %}
+                            {{ hidden_field.errors }}
+                            {{ hidden_field }}
+                        {% endfor %}
+                        {% for field in rating_form.visible_fields %}
+                              {{ field.errors }}
+                              {{ field }}
+                              {{ field.help_text }}
+                        {% endfor %}
+                        <input class="rating_btn"  name="rating" type="submit" value="Prześlij Ocenę" style="float:right" ></input>
+                    </form>
+                </div>
+              </div>
           </div>
         </div>
+    {% if messages %}
+        <ul>
+           {% for message in messages %}
+               <li>{{ message }}</li>
+           {% endfor %}
+        </ul>
+    {% endif %}
 
 
 {% endblock %}

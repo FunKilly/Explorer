@@ -7,6 +7,8 @@ from django.shortcuts import render
 from django.views.generic import View, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from plan.forms import PlanAddPlaceForm
+from django.contrib import messages
+from django.conf import settings
 
 from .models import City, Category, Place, Comment
 from .forms import RatingForm, CommentForm
@@ -26,22 +28,19 @@ class PlaceView(View):
         place = get_object_or_404(Place, id=self.kwargs['id'], slug=self.kwargs['slug'])
         return place
 
-
     def comments_get(self):
         place = get_object_or_404(Place, id=self.kwargs['id'], slug=self.kwargs['slug'])
         comments = place.comments.filter(active=True)
         return comments
 
+    def get_context_data(self,  **kwargs):
 
-    def get_context_data(self,**kwargs):
         kwargs['place'] = self.place_detail()
         kwargs['comments'] = self.comments_get()
         if 'rating_form' not in kwargs:
             kwargs['rating_form'] = RatingForm()
         if 'comment_form' not in kwargs:
             kwargs['comment_form'] = CommentForm()
-        if 'plan_form' not in kwargs:
-            kwargs['plan_form'] = PlanAddPlaceForm()
         return kwargs
 
     def get(self, request, *args, **kwargs):

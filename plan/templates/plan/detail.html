@@ -6,49 +6,53 @@
 {% endblock %}
 
 {% block content %}
+  {% load static %}
+  {% load bootstrap4 %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
   <h1>Twój plan</h1>
-  <table class="plan">
-      <thead>
+  <table class="table table-bordered table-striped table-dark">
+      <thead class="thead-dark">
         <tr>
-            <th>Zdjęcie</th>
+
             <th>Miejsce</th>
-            <th>Termin</th>
-            <th>Usuń</th>
+            <th>Adres</th>
             <th>Cena</th>
+            <th></th>
         </tr>
       </thead>
       <tbody>
           {% for item in plan %}
             {% with place=item.place %}
               <tr>
+
                   <td>
-                      <a href="{{ place.get_absolute_url }}">
-                          <img style="height:200px;width:200px;" src="{% if place.image %}{{ place.image.url }}
-                           {% else %}{% static "img/no_image.png" %}{% endif %}">
-                      </a>
+                      <a href="{{ place.get_absolute_url }}">{{ place.name }}</a>
                   </td>
                   <td>
-                      {{ place.name }}
+                      {{ place.address }}
+                  </td>
+                  <td class="num">
+                      {{ item.cost }}PLN
                   </td>
                   <td>
-                      {{ item.start_date}} - {{ item.end_date }}
+                      <a href="{% url 'plan:plan_remove' place.id %}">Usuń</a>
                   </td>
-                  <td>
-                      <a href="{% url 'plan:plan_remove' place.id %}">Remove</a>
-                  </td>
-                  <td class="num">{{ item.cost }}$</td>
               </tr>
             {% endwith %}
           {% endfor %}
         <tr class="total">
-            <td>Całkowity koszt</td>
-            <td colspan="4"></td>
-            <td class="num">{{ plan.get_total_price }}</td>
+            <td style="font-weight:bold">Całkowity koszt</td>
+            <td colspan="1"></td>
+            <td style="font-weight:bold" class="num">{{ plan.get_total_price }}PLN</td>
         </tr>
       </tbody>
   </table>
+  <p class="text-left">
+    <a href="#" class="btn btn-success">Zapisz plan</a>
+  </p>
   <p class="text-right">
-      <a href="{% url 'explorer:places_list' %}" class="button">Kontynuuj planowanie</a>
-      <a href="#" class="button">Sprawdź</a>
+      <a href="{% url 'explorer:places_list' %}" class="btn btn-success" >Kontynuuj planowanie</a>
+      <a href="#" class="btn btn-success" >Exportuj</a>
   </p>
 {% endblock %}
