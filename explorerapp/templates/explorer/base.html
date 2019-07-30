@@ -32,7 +32,7 @@
                 <p class="navbar-text navbar-left">Witaj <a href="#" class="navbar-link">, {{ user.username }}.</a></p>
 				<li><a href="{% url 'users:logout' %}">Wyloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
-                <li><a href="{% url 'plan:plan_detail' %}">Plan</a></li>
+                <li><a href="{% url 'planninghistory:event_history' %}">Historia Planów</a></li>
 				{% else %}
 				<li><a href="{% url 'users:register' %}">Zarejestruj się</a></li>
 				<li><a href="{% url 'users:login' %}">Zaloguj się</a></li>

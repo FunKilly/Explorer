@@ -6,9 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import View, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from plan.forms import PlanAddPlaceForm
-from django.contrib import messages
-from django.conf import settings
+from django.views.generic import ListView
 
 from .models import City, Category, Place, Comment
 from .forms import RatingForm, CommentForm
@@ -90,7 +88,7 @@ class PlacesList(ListView):
     model = Place
     template_name = 'explorer/places_list.html'
     context_object_name = 'places'
-    paginate_by = 3
+    paginate_by = 5
     queryset = Place.objects.all()
 
 
