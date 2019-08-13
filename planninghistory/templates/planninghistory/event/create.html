@@ -1,0 +1,27 @@
+{% extends "explorer/base.html" %}
+
+{% block title %}
+  Zapisz wydarzenie
+{% endblock %}
+
+{% block content %}
+  <h1>Zapisz</h1>
+
+  <div class="order-info">
+    <ul>
+      {% for item in plan %}
+        <li>
+          {{ item.place.name }},
+          {{ item.place.address }}
+        </li>
+      {% endfor %}
+    </ul>
+    <p>Koszt całkowity {{ plan.get_total_price }}PLN</p>
+  </div>
+
+  <form action="." method="post" class="event-form">
+    {{ form.as_p }}
+    <p><input type="submit" value="Zapisz wydarzenie"></p>
+    {% csrf_token %}
+  </form>
+{% endblock %}

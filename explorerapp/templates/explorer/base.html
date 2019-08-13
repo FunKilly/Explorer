@@ -33,10 +33,12 @@
 				<li><a href="{% url 'users:logout' %}">Wyloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
                 <li><a href="{% url 'planninghistory:event_history' %}">Historia Planów</a></li>
+                <li><a href="{% url 'users:profile' %}">Twój Profil</a></li>
 				{% else %}
 				<li><a href="{% url 'users:register' %}">Zarejestruj się</a></li>
 				<li><a href="{% url 'users:login' %}">Zaloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
+
 				{% endif %}
                 <p class="navbar-text navbar-right">
                     {% with total_items=plan|length %}

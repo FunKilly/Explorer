@@ -4,8 +4,6 @@ from django.urls import reverse
 from django.core.validators import MaxValueValidator
 
 
-
-
 class City(models.Model):
     name = models.CharField(max_length=30)
     slug = models.SlugField(max_length=30, unique=True)

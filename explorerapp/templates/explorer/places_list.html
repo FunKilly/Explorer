@@ -21,7 +21,14 @@
                     <a class="title" href="{{ place.get_absolute_url }}"> {{ place.name }} </a>
                     <a  href="{{ place.get_absolute_url }}">  <img class="image" src="{% if place.image %}{{ place.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"> </a>
                     <div class="desc" >{{ place.description | truncatechars:300 }} <a href="{{place.get_absolute_url}}">(czytaj dalej)</a> </div>
-                    
+                    <form action="{% url 'plan:plan_add' place.id %}"  method="post" class="plan_form" >
+                    {% csrf_token %}
+                    {{ plan_form.start_date.errors }}
+                    <p style="float:left">{{ plan_form.end_date.errors }}</p>
+                    <p>{{ plan_form.start_date }}</p>
+                    <p>{{ plan_form.end_date }}</p>
+                    <input class="btn btn-primary btn-lg"  name="plan" type="submit" value="Dodaj miejsce" style="float:right" ></input>
+                </form>
                   </div>
               {% endfor %}
 

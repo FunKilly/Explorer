@@ -1,16 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, Http404
-from django.urls import reverse
-from django.contrib import messages
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.generic import View, ListView
+from django.views.generic import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 
-from .models import City, Category, Place, Comment
+from .models import Category, Place
 from .forms import RatingForm, CommentForm
 from .filters import PlaceFilter
+
 
 def index(request):
     # Strona glowna.
@@ -75,7 +74,7 @@ class PlaceView(View):
         return render(request, self.template_name, self.get_context_data(**ctxt))
 
 
-def places_list_by_category(request,category_slug):
+def places_list_by_category(request, category_slug):
     category = Category.objects.all()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -112,7 +111,8 @@ def places_list(request):
         places = paginator.page(1)
     except EmptyPage:
         places = paginator.page(paginator.num_pages )
+
+
     context = {'paginator':paginator, 'filter':place_filter, 'places':places}
     return render(request, 'explorer/places_list.html', context)
-
 
