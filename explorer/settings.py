@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     'mathfilters',
     'bootstrap_datepicker_plus',
+    'django_extensions',
     #my apps
     'explorerapp',
     'users',

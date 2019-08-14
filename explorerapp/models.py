@@ -44,7 +44,6 @@ class Place(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
-    creation_date = models.DecimalField(max_digits=4, decimal_places=0, )
     sum_of_rating = models.DecimalField(max_digits=9, decimal_places=2, default=5)
     num_of_ratings = models.IntegerField(default=1)
     tags = TaggableManager()

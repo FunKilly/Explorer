@@ -1,36 +1,45 @@
 {% extends "explorer/base.html"%}
-{% load static from staticfiles %}
-{% block title %}Profile | {{ user }} {{ super }}{% endblock %}
+{% load static %}
+{% load bootstrap3 %}
 
-{% block body %}
-    <h1>Profile</h1>
+{% block header %}Użytkownik | {{ user }} {{ super }}{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+    <h1>Profil</h1>
+    <img class="img-thumbnail" id="placeimg" style="float:left; margin:25px; width:200px; height:220px;" src="{% if profile.avatar %}{{ profile.avatar.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
     <div class="grid-20">
-        <ul>
-            <li><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
-            <li><a href="{% url 'accounts:change_password' %}">Change Password</a></li>
-        </ul>
+
     </div>
-    <div class="grid-80">
-        {% if not profile.first_name %}
-            <p>You have an empty profile.</p>
-            <a href="{% url 'accounts:edit_profile' %}">Add some info</a>
-        {% else %}
-            <div class="grid-50">
-                <p><span class="underline">First Name</span>: {{ profile.first_name }}</p>
-                <p><span class="underline">Email</span>: {{ profile.email }}</p>
-                <p><span class="underline">City</span>: {{ profile.city }}</p>
-                <p><span class="underline">State</span>: {{ profile.state }}</p>
-                <p><span class="underline">Country</span>: {{ profile.country }}</p>
+
+    <div class="container">
+          <div class="row" >
+            <div class="col-md-6" id="profile">
+
+                {% if not profile.first_name %}
+                    <p>Profil jest pusty. Uzupełnij profil</p>
+                    <a href="{% url 'users:edit_profile' %}">Dodaj elementy do profilu</a>
+                {% else %}
+                    <div >
+
+                        <p><span class="underline">Imię</span>: {{ profile.first_name }}</p>
+                        <p><span class="underline">Nazwisko</span>: {{ profile.last_name }}</p>
+                        <p><span class="underline">Data urodzenia</span>: {{ profile.birth_date }}</p>
+                        <p><span class="underline">Email</span>: {{ profile.email }}</p>
+                        <p><span class="underline">Miasto</span>: {{ profile.city }}</p>
+                        <p><span class="underline">Województwo</span>: {{ profile.state }}</p>
+                        <p><span class="underline">Kraj</span>: {{ profile.country }}</p>
+                    </div>
+                    <div >
+                        <p><span class="underline">Bio</span>: {{ profile.bio|safe }}</p>
+                    </div>
+                    <a class="btn btn-primary" href="{% url 'users:edit_profile' %}">Edytuj Profil</a></li>
+
+                {% endif %}
             </div>
-            <div class="grid-50">
-                <p><span class="underline">Last Name</span>: {{ profile.last_name }}</p>
-                <p><span class="underline">Birth Date</span>: {{ profile.birth_date }}</p>
-                <p><span class="underline">Favorite Animal</span>: {{ profile.favorite_animal }}</p>
-                <p><span class="underline">Hobby</span>: {{ profile.hobby }}</p>
+            <div class="col-md-3" id="information-table" >
             </div>
-            <div class="grid-100">
-                <p><span class="underline">Bio</span>: {{ profile.bio|safe }}</p>
-            </div>
-        {% endif %}
+          </div>
     </div>
 {% endblock %}

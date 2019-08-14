@@ -7,8 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
 
-from .models import *
-from .forms import *
+from .models import Profile
+from .forms import UserProfileForm
 
 def register(request):
     if request.method != 'POST':
@@ -34,11 +34,11 @@ def profile(request):
 @login_required
 def edit_profile(request):
     user = request.user
-    profile = get_object_or_404(models.Profile, user=user)
-    form = forms.UserProfileForm(instance=profile)
+    profile = get_object_or_404(Profile, user=user)
+    form = UserProfileForm(instance=profile)
 
     if request.method == 'POST':
-        form = forms.UserProfileForm(instance=profile, data=request.POST)
+        form = UserProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Updated the Profile Successfully!")

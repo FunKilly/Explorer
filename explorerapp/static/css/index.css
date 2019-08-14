@@ -53,7 +53,7 @@ div.maintop{
 }
 h1.maintop{
     font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
-    font-size: 6em;
+    font-size: 6vw;
     text-shadow: 2px 2px black;
 	font-weight: 300;
     color:white;
@@ -68,7 +68,7 @@ h1.maintop{
 
 h2.maintop{
 
-    font-size: 4em;
+    font-size: 4vw;
     text-shadow: 2px 2px black;
 	font-weight: 300;
     color:white;

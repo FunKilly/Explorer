@@ -1,10 +1,9 @@
+from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import Profile
 
 class UserProfileForm(forms.ModelForm):
-    email=forms.EmailField(widget=forms.EmailInput())
-    confirm_email=forms.EmailField(widget=forms.EmailInput())
-    bio = forms.Textarea()
+    bio = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
         model = Profile
@@ -19,17 +18,18 @@ class UserProfileForm(forms.ModelForm):
             'state',
             'country',
         ]
+        labels = {
+            'first_name': _('Imię'),
+            'last_name': _('Nazwisko'),
+            'birth_date': _('Data urodzenia'),
+            'city': _('Miasto'),
+            'state': _('Województwo'),
+            'country': _('Kraj')}
 
     def clean(self):
         cleaned_data = super(UserProfileForm, self).clean()
-        email = cleaned_data.get("email")
-        confirm_email = cleaned_data.get("confirm_email")
         bio = cleaned_data.get("bio")
 
-        if email != confirm_email:
-            raise forms.ValidationError(
-                "Emails must match!"
-            )
 
         if len(bio) < 10:
             raise forms.ValidationError(
