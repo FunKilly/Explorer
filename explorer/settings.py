@@ -25,7 +25,7 @@ SECRET_KEY = 'u^7iupxu*!fd%k9bbd_)$=nd!dwv51f6t_xndb42y_6-a3wvi&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.1.9"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -148,3 +148,19 @@ BOOTSTRAP3 = {
 #Session
 
 PLAN_SESSION_ID = 'plan'
+
+# Heroku settings
+if os.getcwd() == '/app':
+    import dj_database_url
+    DATABASES = {
+    'default': dj_database_url.config(default='postgres://localhost')
+    }
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # Allow all host headers.
+    ALLOWED_HOSTS = ['*']
+
+    # Static asset configuration
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
