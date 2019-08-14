@@ -1,8 +1,10 @@
 from django.db import models
 from explorerapp.models import Place
+from django.contrib.auth.models import User
 
 
 class Event(models.Model):
+    traveler = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=50)
     start_date = models.DateField()
     end_date = models.DateField()

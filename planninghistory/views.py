@@ -10,7 +10,9 @@ def event_create(request):
     if request.method == 'POST':
         form = EventCreateForm(request.POST)
         if form.is_valid():
-            event = form.save()
+            event = form.save(commit=False)
+            event.traveler = request.user
+            event.save()
             for place in plan:
                 Place.objects.create(event=event,
                                      place=place['place'],
@@ -33,7 +35,8 @@ class EventHistory(ListView):
     paginate_by = 3
     ordering = ['-created']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data( **kwargs)
         context['places'] = Place.objects.all()
+        context['events'] = Event.objects.filter(traveler=self.request.user)
         return context
