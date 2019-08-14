@@ -43,7 +43,7 @@
 }
 
 div.maintop{
-    height:400px;
+    height:40vh;
     width:100%;
     max-weight:100%;
     background: url("/static/img/background2.jpg") no-repeat 100% 50% ;
@@ -55,19 +55,17 @@ h1.maintop{
     font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
     font-size: 4vw;
     text-shadow: 2px 2px black;
-	font-weight: 300;
     color:white;
     display: block;
     margin-left: auto;
     margin-right: auto;
     width:60%;
-    padding-top:10%;
+    padding-top:7vh;
     text-align:center;
 }
 
 h2.maintop{
-    position:static;
-    font-size: 3.9vw;
+    font-size: 3.5vw;
     text-shadow: 2px 2px black;
 	font-weight: 300;
     color:white;
