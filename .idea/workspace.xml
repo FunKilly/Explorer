@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="43ad378b-d1f7-4933-81ac-99150ca6385b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/explorerapp/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/explorerapp/static/css/index.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -105,8 +107,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/explorerapp/static/css/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+            <state relative-caret-position="706">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
             </state>
           </provider>
         </entry>
@@ -259,6 +261,24 @@
             <path>
               <item name="explorer" type="b2602c69:ProjectViewProjectNode" />
               <item name="explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="explorerapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="explorerapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="explorer" type="462c0819:PsiDirectoryNode" />
+              <item name="explorerapp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="explorer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="explorer" type="462c0819:PsiDirectoryNode" />
               <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -365,7 +385,7 @@
       <workItem from="1564832277230" duration="4045000" />
       <workItem from="1564951612354" duration="3884000" />
       <workItem from="1565289131329" duration="8175000" />
-      <workItem from="1565628430907" duration="37881000" />
+      <workItem from="1565628430907" duration="38710000" />
     </task>
     <servers />
   </component>
@@ -375,7 +395,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183908000" />
+    <option name="totallyTimeSpent" value="184737000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1366" y="-2" width="1920" height="1082" extended-state="6" />
@@ -818,8 +838,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/explorerapp/static/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="55" column="18" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+        <state relative-caret-position="706">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
         </state>
       </provider>
     </entry>
