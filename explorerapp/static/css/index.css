@@ -50,34 +50,21 @@ div.maintop{
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     z-index: -3;
     font-size:60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 h1.maintop{
     font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
-    font-size: calc(45px + 0.4vw);
+    font-size: 10vh;
     text-shadow: 2px 2px black;
     color:white;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:60%;
-    padding-top:7vh;
-    text-align:center;
+    position:relative;
+
 }
 
-h2.maintop{
-    font-size: calc(40px + 0.4vw);
-    text-shadow: 2px 2px black;
-	font-weight: 300;
-    color:white;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:50%;
-    text-align:center;
-    height:20%;
-    border-radius: 5rem;
-    }
+
 
 
 a{

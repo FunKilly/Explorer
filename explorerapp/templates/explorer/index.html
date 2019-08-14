@@ -4,8 +4,7 @@
   {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
   <div  class="maintop">
-    <h1 class="maintop">Witaj Podróżniku</h1>
-      <h2 class="maintop"><a style="text-decoration: none;" href="{% url 'explorer:places_list' %}">Zaplanuj Podróż</a></h2>
+    <h1 class="maintop">Witaj Podróżniku </br><a  href="{% url 'explorer:places_list' %}">Zaplanuj Podróż</a> </h1>
   </div>
 {% endblock header %}
 
