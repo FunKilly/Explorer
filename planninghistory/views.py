@@ -22,10 +22,11 @@ def event_create(request):
             plan.clear()
             context = {'event': event}
             return render(request, 'planninghistory/event/created.html', context)
+
     else:
         form = EventCreateForm()
-        context = {'plan': plan, 'form': form}
-        return render(request, 'planninghistory/event/create.html', context)
+    context = {'plan': plan, 'form': form}
+    return render(request, 'planninghistory/event/create.html', context)
 
 
 class EventHistory(ListView):

@@ -48,11 +48,12 @@
         </tr>
       </tbody>
   </table>
+  {% if user.is_authenticated %}
   <p class="text-left">
     <a href="{% url 'planninghistory:event_create' %}" class="btn btn-success">Zapisz plan</a>
   </p>
+  {% endif %}
   <p class="text-right">
       <a href="{% url 'explorer:places_list' %}" class="btn btn-success" >Kontynuuj planowanie</a>
-      <a href="#" class="btn btn-success" >Exportuj</a>
   </p>
 {% endblock %}
