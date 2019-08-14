@@ -74,13 +74,16 @@ class PlaceView(View):
         return render(request, self.template_name, self.get_context_data(**ctxt))
 
 
-def places_list_by_category(request, category_slug):
-    category = Category.objects.all()
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-    context = {'category': category}
-    return render(request, 'explorer/category_list.html', context)
+class PlacesListByCategory(ListView):
+    model = Category
+    template_name = 'explorer/category_list.html'
+    context_object_name = 'category'
+    paginate_by = 5
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['places'] = Place.objects.filter(category__slug=self.kwargs['slug'])
+        return context
 
 
 class PlacesList(ListView):

@@ -9,7 +9,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<int:id>/<slug:slug>/', views.PlaceView.as_view(), name='place_detail'),
     path('places/', views.places_list, name='places_list'),
-    path('<slug:category_slug>/', views.places_list_by_category, name='places_list_by_category'),
+    path('<slug:slug>/', views.PlacesListByCategory.as_view(), name='places_list_by_category'),
 
 ]
 
