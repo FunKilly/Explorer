@@ -1,14 +1,10 @@
 {% extends "explorer/base.html" %}
-
-
-
 {% block title %}
 {% endblock %}
 
 {% block content %}
   {% load static %}
   {% load bootstrap3 %}
-
 
   <link rel="stylesheet" type="text/css" href="{% static 'css/places_list.css' %}">
   <div class="container">
@@ -32,7 +28,6 @@
                   </div>
               {% endfor %}
 
-
             </div>
             <div class="pagination">
                 {% include "explorer/pagination.html" %}
@@ -51,12 +46,8 @@
                 <br/><br/>
                 <button  type="submit" class="btn btn-primary" >Filtruj</button>
             </form>
-
-
         </div>
     </div>
   </div>
-
-
 
 {% endblock %}

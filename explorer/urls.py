@@ -21,6 +21,6 @@ urlpatterns = [
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path('planninghistory/', include(('planninghistory.urls', 'planninghistory'), namespace='planninghistory')),
     path('plan/', include('plan.urls', namespace='plan')),
-    path('',include(('explorerapp.urls', 'explorer'),namespace = 'explorer')),
+    path('', include(('explorerapp.urls', 'explorer'),namespace = 'explorer')),
 
 ]

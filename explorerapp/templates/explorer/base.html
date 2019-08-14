@@ -6,12 +6,9 @@
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<title>Explorer</title>
-	
 	{% bootstrap_css %}
 	{% bootstrap_javascript %}
-
   </head>
 <body >
     <nav class="navbar navbar-default navbar-static-top">
@@ -23,9 +20,6 @@
 			aria-expanded="false" aria-controls="navbar">
 	      </button>
 		  <a class="navbar-brand" href="{% url 'explorer:index' %}">Strona Główna</a>
-
-
-
 		  <ul class="nav navbar-nav">
 			<ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
@@ -38,7 +32,6 @@
 				<li><a href="{% url 'users:register' %}">Zarejestruj się</a></li>
 				<li><a href="{% url 'users:login' %}">Zaloguj się</a></li>
 				<li><a href="{% url 'explorer:places_list' %}">Lista miejsc</a></li>
-
 				{% endif %}
                 <p class="navbar-text navbar-right">
                     {% with total_items=plan|length %}
@@ -57,31 +50,22 @@
 			</ul>
 		  </ul>
           <div class="form-inline my-2 my-lg-0">
-
-
           </div>
-
-
         </div><!--/.nav-collapse -->
-
 	  </div>
 	</nav>
-
-
-	
 	<div class="container">
 	  <div class="page-header">
 	    {% block header %}{% endblock header %}
       </div>
     <div id="subheader">
-
     </div>
 	  <div>
 	    {% block content %}{% endblock content %}
       </div>
 
 	</div> <!-- /container -->
-
+    <footer style="width:100%; height:10vw;"></footer>
   </body>
 </html>
 

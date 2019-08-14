@@ -1,12 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
-
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render
 from django.views.generic import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 
-from .models import Category, Place
+from .models import Category, Place, Rating
 from .forms import RatingForm, CommentForm
 from .filters import PlaceFilter
 
@@ -30,6 +28,11 @@ class PlaceView(View):
         comments = place.comments.filter(active=True)
         return comments
 
+    def get_rating(self, request):
+        place = self.place_detail()
+        rating = Rating.objects.filter(user=request.user, place=place)
+        return rating
+
     def get_context_data(self,  **kwargs):
 
         kwargs['place'] = self.place_detail()
@@ -50,9 +53,18 @@ class PlaceView(View):
             rating_form = RatingForm(request.POST)
 
             if rating_form.is_valid():
-                place = get_object_or_404(Place, id=self.kwargs['id'], slug=self.kwargs['slug'])
-                place.sum_of_rating += int(rating_form.cleaned_data['Rating'])
+                place = self.place_detail()
+                rate = int(rating_form.cleaned_data['Rating'])
+                place.sum_of_rating += rate
                 place.num_of_ratings += 1
+
+                if self.get_rating(request):
+                    old_rate = Rating.objects.filter(user=request.user, place=place)
+                    place.num_of_ratings -= 1
+                    place.sum_of_rating -= old_rate[0].rate
+                    old_rate.delete()
+
+                Rating.objects.create(user=request.user, place=place, rate=rate)
                 place.save()
                 return redirect('explorer:place_detail', id=self.kwargs['id'], slug=self.kwargs['slug'])
             else:
@@ -93,7 +105,6 @@ class PlacesList(ListView):
     paginate_by = 5
     queryset = Place.objects.all()
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = PlaceFilter(self.request.GET,  queryset=self.get_queryset())
@@ -114,7 +125,6 @@ def places_list(request):
         places = paginator.page(1)
     except EmptyPage:
         places = paginator.page(paginator.num_pages )
-
 
     context = {'paginator':paginator, 'filter':place_filter, 'places':places}
     return render(request, 'explorer/places_list.html', context)

@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from .models import Comment, Place, Address
+from .models import Comment
 
 class RatingForm(forms.Form):
     OPTIONS = [

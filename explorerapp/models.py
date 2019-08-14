@@ -1,7 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from django.urls import reverse
-from django.core.validators import MaxValueValidator
+from django.contrib.auth.models import User
 
 
 class City(models.Model):
@@ -33,6 +33,7 @@ class Address(models.Model):
     def __str__(self):
         address = (self.street, self.location_number, self.city.name)
         return ' '.join(address)
+
 
 class Place(models.Model):
     name = models.CharField(max_length=60)
@@ -70,5 +71,11 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created',)
 
-    def __str__(selfs):
+    def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    rate = models.IntegerField()

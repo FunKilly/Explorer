@@ -1,9 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
-from django.core.serializers.json import DjangoJSONEncoder
-import json
 from explorerapp.models import Place
-import datetime
+
 
 
 class Plan(object):

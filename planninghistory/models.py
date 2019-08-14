@@ -1,6 +1,6 @@
 from django.db import models
 from explorerapp.models import Place
-from datetime import datetime
+
 
 class Event(models.Model):
     name = models.CharField(max_length=50)
