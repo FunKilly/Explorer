@@ -8,8 +8,6 @@
     overflow-y: hidden;
     text-align: center;
 
-
-
 }
 
 
@@ -43,25 +41,26 @@
 }
 
 div.maintop{
+    height:400px;
     width:100%;
     max-weight:100%;
     background: url("/static/img/background2.jpg") no-repeat 100% 50% ;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     z-index: -3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
 }
 h1.maintop{
-
+    font-family: "Nunito Sans", Arial, Helvetica, sans-serif;
+    font-size: 4vw;
     text-shadow: 2px 2px black;
-    color:black;
-    position:relative;
-
+    color:white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:60%;
+    padding-top:7vh;
+    text-align:center;
 }
-
-
 
 
 a{
